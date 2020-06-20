@@ -35,20 +35,19 @@ app.post("/authenticate", (req, res) => {
       const access_token = params.get("access_token");
       const scope = params.get("scope");
       const token_type = params.get("token_type");
-
+      console.log(access_token)
       // Request to return data of a user that has been authenticated
-      return fetch(`https://api.github.com/repos/${partUrl}/topics`, {
+      return fetch(`https://api.github.com/repos/nrtestweb/repo1/topics`, {
         method: "PUT",
         headers: {
           Accept: "application/vnd.github.mercy-preview+json",
-          Authorization: `token+${access_token}`
+          Authorization: `token ${access_token}`
         },
-        body:{  "names": [
+        body:{"names": [
           "octocat",
           "atom",
           "electron",
-          "api"
-        ]}
+          "api"]}
       })
       // return fetch(
       //   `https://api.github.com/user?access_token=${access_token}&scope=${scope}&token_type=${token_type}`
@@ -56,7 +55,8 @@ app.post("/authenticate", (req, res) => {
     })
     .then(response => response.json())
     .then(response => {
-      return res.status(200).json(response);
+      console.log(response)
+      res.status(200).json(response);
     })
     .catch(error => {
       return res.status(400).json(error);
